@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+body {
+    background: url('../img/word_rush.jpeg') no-repeat center center/cover;
+    font-family: 'Roboto Mono', monospace;
+    color: #fff;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-container {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    height: 80%;
+    max-height: 600px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 20, 0.8));
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+#score, #time {
+    position: absolute;
+    top: 30px;
+    font-size: 2em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    letter-spacing: 1px;
+}
+
+#score {
+    left: 30px;
+}
+
+#time {
+    right: 30px;
+}
+
+.word-display {
+    font-size: 4em;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+    margin-bottom: 40px;
+    animation: wordFadeIn 1.2s ease-in-out;
+    letter-spacing: 2px;
+}
+
+#word-input {
+    width: 75%;
+    padding: 20px;
+    font-size: 1.6em;
+    border: none;
+    border-radius: 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+#word-input:focus {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+button {
+    padding: 18px 35px;
+    font-size: 1.3em;
+    background: linear-gradient(to bottom, #66bb6a, #4caf50);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
+}
+
+button#restart-btn {
+    background: linear-gradient(to bottom, #e57373, #f44336);
+    margin-top: 20px;
+}
+
+@keyframes wordFadeIn {
+   /* This animation makes the displayed word fade in and slide up slightly when it appear, I searched through Google*/
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

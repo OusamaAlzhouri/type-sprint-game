@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Sprint</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <script src="./assets/js/app.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="./assets/muisc/music.mp3" type="audio/mpeg">
+    </audio>
+    <div class="game-container">
+        <div id="score">Score: 0</div>
+        <div id="time">Time: 99s</div>
+        <div class="word-display" id="word-display">Press Start</div>
+        <input type="text" id="word-input" placeholder="Start typing..." disabled>
+        <button id="start-btn">Start Game</button>
+        <button id="restart-btn" style="display: none;">Restart</button>
+    </div>
+</body>
+</html>
