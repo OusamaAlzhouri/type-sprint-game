@@ -37,6 +37,7 @@ const restartBtn = document.getElementById("restart-btn");
 const timeDisplay = document.getElementById("time");
 const scoreDisplay = document.getElementById("score");
 const backgroundMusic = document.getElementById("background-music");
+const scoreboardList = document.getElementById("scoreboard-list");
 
 let time = 99;
 let score = 0;
@@ -45,9 +46,6 @@ let timer;
 let wordsTyped = [];
 let scores = [];
 
-// So, for the Score class, I wanted to make sure it kept track of each game's results.
-// I figured a class would be perfect for this, since it's like a blueprint for each score.
-// I looked up some class examples on MDN to refresh my memory on the syntax, and that helped a lot.
 class Score {
     #date;
     #hits;
@@ -65,10 +63,6 @@ class Score {
 }
 
 function getRandomWord() {
-    // Okay, so the tricky part was making sure the same word didn't show up twice in a row.
-    // I remembered seeing something about filtering arrays on MDN, so I checked that out.
-    // I ended up using array.filter() to create a list of words that hadn't been typed yet.
-    // Then I just picked a random word from that list.
     let availableWords = words.filter(word => !wordsTyped.includes(word));
     if (availableWords.length === 0) {
         return null; 
@@ -106,21 +100,45 @@ function updateTime() {
     }
 }
 
+
 function endGame() {
     clearInterval(timer);
     wordInput.disabled = true;
     wordDisplay.textContent = "Game Over!";
     backgroundMusic.pause();
-    // For the percentage, I just used the basic formula: (score / total words) * 100.
-    // I used Chatgpt to help me figure it out, but I double-checked some examples online just to be sure.
+  
     const percentage = (score / words.length) * 100;
-    scores.push(new Score(score, percentage));
-}
+  
+    const newScore = {
+      hits: score,
+      percentage: percentage.toFixed(2),
+      date: new Date().toLocaleString()
+    };
+  
+    let savedScores = JSON.parse(localStorage.getItem("scores")) || [];
+  
+     savedScores.push(newScore);
+     savedScores.sort((a, b) => b.hits - a.hits);
+  
+     savedScores.splice(9);
+  
+     localStorage.setItem("scores", JSON.stringify(savedScores));
+  
+     showScoreboard(savedScores);
 
+}
+  
+  function showScoreboard(scoresArray) {
+    scoreboardList.innerHTML = "";
+    scoresArray.forEach(score => {
+      const li = document.createElement("li");
+      li.textContent = `Hits: ${score.hits} | ${score.percentage}% | ${score.date}`;
+      scoreboardList.appendChild(li);
+    });
+  }
+
+  
 wordInput.addEventListener("input", () => {
-    // Here, I wanted to check if what the player typed matched the word on the screen.
-    // I used the trim() method to ignore any extra spaces, just to make it more user-friendly.
-    // If they match, we bump up the score and grab a new word. ( I also used Google to help me figure it out)
     if (wordInput.value.trim() === currentWord) {
         score++;
         scoreDisplay.textContent = "Score: " + score;
@@ -145,5 +163,15 @@ restartBtn.addEventListener("click", () => {
     startGame();
     restartBtn.style.display = "none";
     startBtn.style.display = "block";
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const stored = JSON.parse(localStorage.getItem("scores")) || [];
+    showScoreboard(stored);
+  });
+
+  document.getElementById("clear-history-btn").addEventListener("click", () => {
+    localStorage.removeItem("scores");
+    scoreboardList.innerHTML = "";
 });
 

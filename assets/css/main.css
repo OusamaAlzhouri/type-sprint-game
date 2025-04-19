@@ -1,109 +1,155 @@
 @charset "UTF-8";
 
-body {
-    background: url('../img/word_rush.jpeg') no-repeat center center/cover;
-    font-family: 'Roboto Mono', monospace;
-    color: #fff;
+* {
     margin: 0;
-    overflow: hidden;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
+    color: #f0f0f0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    gap: 30px;
+    padding: 20px;
 }
 
 .game-container {
-    position: relative;
-    width: 80%;
-    max-width: 800px;
-    height: 80%;
-    max-height: 600px;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 20, 0.8));
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffffffcc;
+    letter-spacing: 1px;
 }
 
 #score, #time {
-    position: absolute;
-    top: 30px;
-    font-size: 2em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-    letter-spacing: 1px;
-}
-
-#score {
-    left: 30px;
-}
-
-#time {
-    right: 30px;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #eeeeee;
 }
 
 .word-display {
-    font-size: 4em;
-    font-weight: bold;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
-    margin-bottom: 40px;
-    animation: wordFadeIn 1.2s ease-in-out;
-    letter-spacing: 2px;
+    font-size: 2.5rem;
+    margin: 30px 0;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 #word-input {
-    width: 75%;
-    padding: 20px;
-    font-size: 1.6em;
+    width: 100%;
+    padding: 18px;
+    font-size: 1.3rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 15px;
     text-align: center;
     background: rgba(255, 255, 255, 0.15);
     color: #fff;
-    outline: none;
-    transition: box-shadow 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
 #word-input:focus {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    outline: none;
+    box-shadow: 0 0 10px #00ffc8;
+    background: rgba(255, 255, 255, 0.25);
 }
 
 button {
-    padding: 18px 35px;
-    font-size: 1.3em;
-    background: linear-gradient(to bottom, #66bb6a, #4caf50);
-    color: #fff;
+    padding: 14px 28px;
+    font-size: 1.1rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
+    margin: 10px;
     cursor: pointer;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    letter-spacing: 1px;
-    margin-top: 20px;
+    color: #fff;
+    background: linear-gradient(135deg, #00c9ff, #92fe9d);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 200, 0.3);
 }
 
 button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 255, 200, 0.5);
 }
 
-button#restart-btn {
-    background: linear-gradient(to bottom, #e57373, #f44336);
-    margin-top: 20px;
+#restart-btn {
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
 }
 
-@keyframes wordFadeIn {
-   /* This animation makes the displayed word fade in and slide up slightly when it appear, I searched through Google*/
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+#restart-btn:hover {
+    box-shadow: 0 6px 20px rgba(255, 65, 108, 0.5);
 }
+
+.scoreboard-container {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 15px;
+    margin-top: 0;
+    padding: 20px;
+    max-height: 220px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.scoreboard-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #ffffffcc;
+    text-align: center;
+}
+
+.scoreboard-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.scoreboard-container li {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: #dcdcdc;
+    font-weight: 500;
+}
+
+#clear-history-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 65, 108, 0.5);
+    transition: all 0.3s ease;
+}
+
+#clear-history-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 65, 108, 0.7);
+}
+
